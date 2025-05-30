@@ -13,7 +13,7 @@ export interface Product extends Document {
 }
 
 const productSchema: Schema = new Schema({
-    id: { type: String, required: true, unique: true },
+    id: { type: String, auto: true, default: () => new mongoose.Types.ObjectId().toString() },
     name: { type: String, required: true },
     description: { type: String, required: true },
     price: { type: Number, required: true },
