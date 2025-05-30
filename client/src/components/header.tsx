@@ -4,15 +4,16 @@ import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import {Search} from "lucide-react";
 import Link from "next/link"
-import axios from "axios";
 import {useState} from "react";
+import {useRouter} from "next/navigation";
 
 export default function Header() {
     const [searchQuery, setSearchQuery] = useState('');
 
-    async function handleSearch() {
-        const response = await axios.get(`http://localhost:3002/api/products/search?search=${searchQuery}`)
-        console.log(response)
+    const router = useRouter();
+
+    function handleSearch() {
+        router.push(`/search/${searchQuery}`);
     }
 
     return (
