@@ -1,4 +1,6 @@
-export interface Product {
+import mongoose, { Schema, Document } from 'mongoose';
+
+export interface Product extends Document {
     id: string;
     name: string;
     description: string;
@@ -10,4 +12,16 @@ export interface Product {
     updatedAt: Date;
 }
 
-export let products: Product[] = [];
+const productSchema: Schema = new Schema({
+    id: { type: String, required: true, unique: true },
+    name: { type: String, required: true },
+    description: { type: String, required: true },
+    price: { type: Number, required: true },
+    imageUrl: { type: String, required: true },
+    categories: { type: [String], required: true },
+    stock: { type: Number, required: true },
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now }
+});
+
+export const ProductModel = mongoose.model<Product>('Product', productSchema, 'products');
