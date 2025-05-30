@@ -11,6 +11,23 @@ export const getProducts = async (req: Request, res: Response) => {
     }
 }
 
+export const findProductBySearch = async (req: Request, res: Response) => {
+    try {
+        const searchQuery = req.query.search as string;
+        const products = await ProductModel.find({
+            $or: [
+                { name: { $regex: searchQuery, $options: 'i' } },
+                { description: { $regex: searchQuery, $options: 'i' } },
+                { categories: { $regex: searchQuery, $options: 'i' }}
+            ]
+        });
+        res.status(200).json(products);
+    }
+    catch (error) {
+        res.status(500).json({ message: "Error searching products: " + error});
+    }
+}
+
 export const postProduct = async (req: Request, res: Response) => {
     try {
         const { name, description, price, imageUrl, categories, stock } = req.body;
