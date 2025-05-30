@@ -28,6 +28,20 @@ export const findProductBySearch = async (req: Request, res: Response) => {
     }
 }
 
+export const findProductByID = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const productID = req.params.id
+        const product = await ProductModel.findOne({_id: productID});
+        if (!product) {
+            res.status(404).json({message: "Product not found"});
+        }
+        res.status(200).json(product);
+    }
+    catch (error) {
+        res.status(500).json({ message: "Error fetching product: " + error});
+    }
+}
+
 export const postProduct = async (req: Request, res: Response) => {
     try {
         const { name, description, price, imageUrl, categories, stock } = req.body;
