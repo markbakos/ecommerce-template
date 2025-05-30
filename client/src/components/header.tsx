@@ -6,7 +6,7 @@ export default function Header() {
 
 
     return (
-        <div className="flex w-screen h-24 items-center justify-center bg-white">
+        <div className="flex w-screen h-24 items-center justify-center bg-white border">
             <div className="w-[30vw] lg:w-[16vw]">
                 <Link href="/">
                     <h1 className="text-3xl font-bold text-blue-600 text-center pr-8 lg:p-0">
