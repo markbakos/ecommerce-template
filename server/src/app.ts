@@ -1,6 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import cors from 'cors';
+
 import {errorHandler} from "./middleware/errorHandler";
 
 import productRoutes from "./routes/productRoutes";
@@ -8,6 +10,12 @@ import productRoutes from "./routes/productRoutes";
 const app = express();
 dotenv.config();
 
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    optionsSuccessStatus: 200
+}
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.get('/', (req, res) => {
